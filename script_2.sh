@@ -1,14 +1,24 @@
 #!/bin/bash
 
-# Update and install necessary dependencies
+# Update and install Apache and PHP
 sudo yum update -y
-sudo yum install -y php php-mysqlnd
+sudo yum install -y httpd php php-mysqlnd
 
-# Additional setup can go here, such as:
-# - Configuring the application environment
-# - Installing application-specific dependencies
-# - Setting up logging, monitoring, etc.
+# Start and enable Apache
+sudo systemctl start httpd
+sudo systemctl enable httpd
 
-# Example: Setting up a directory for application logs
-sudo mkdir -p /var/log/my_app
-sudo chown -R ec2-user:ec2-user /var/log/my_app
+# Download and install WordPress
+wget https://wordpress.org/latest.tar.gz
+tar -xzf latest.tar.gz
+sudo mv wordpress/* /var/www/html/
+
+# Set permissions
+sudo chown -R apache:apache /var/www/html
+sudo chmod -R 755 /var/www/html
+
+# Create WordPress configuration file
+sudo cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+
+# Restart Apache to apply changes
+sudo systemctl restart httpd
