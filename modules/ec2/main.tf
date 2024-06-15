@@ -27,9 +27,9 @@ resource "aws_launch_template" "ec2module_bastion" {
 resource "aws_autoscaling_group" "ec2_bastion" {
   name                = "as_bastion"
   vpc_zone_identifier = [var.public_subnet_az1_id, var.public_subnet_az2_id]
-  min_size            = 2
-  max_size            = 2
-  desired_capacity    = 2
+  min_size            = 1
+  max_size            = 1
+  desired_capacity    = 1
 
   launch_template {
     id      = aws_launch_template.ec2module_bastion.id
@@ -94,9 +94,9 @@ resource "aws_launch_template" "ec2module_app" {
 resource "aws_autoscaling_group" "as_app" {
   name                = "ec2As_app"
   vpc_zone_identifier = [var.private_app_subnet_az1_id, var.private_app_subnet_az2_id]
-  min_size            = 2
-  max_size            = 3
-  desired_capacity    = 2
+  min_size            = 1
+  max_size            = 1
+  desired_capacity    = 1
 
   launch_template {
     id      = aws_launch_template.ec2module_app.id
