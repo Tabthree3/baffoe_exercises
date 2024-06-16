@@ -16,7 +16,7 @@ resource "aws_launch_template" "ec2module_bastion" {
   image_id               = data.aws_ami.linux.id
   instance_type          = "t2.micro"
   vpc_security_group_ids = [var.webserver_security_group_id]
-  key_name               = "your-key-name"  # Hardcoded key name
+  key_name               = "pemkey2"  # Hardcoded key name
   user_data              = filebase64("script.sh")
 
   tags = {
