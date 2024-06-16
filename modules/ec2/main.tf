@@ -16,6 +16,7 @@ resource "aws_launch_template" "ec2module_bastion" {
   image_id               = data.aws_ami.linux.id
   instance_type          = "t2.micro"
   vpc_security_group_ids = [var.webserver_security_group_id]
+  key_name               = "your-key-name"  # Hardcoded key name
   user_data              = filebase64("script.sh")
 
   tags = {
@@ -84,7 +85,8 @@ resource "aws_launch_template" "ec2module_app" {
   image_id               = data.aws_ami.linux.id
   instance_type          = "t2.micro"
   vpc_security_group_ids = [var.appserver_security_group_id]
- user_data = filebase64("script_2.sh")
+  user_data              = filebase64("script_2.sh")
+
   tags = {
     Name = "ec2_app_tier"
   }
