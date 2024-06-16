@@ -8,5 +8,5 @@ private_app_subnet_az2_cidr  = "10.0.4.0/24"
 private_data_subnet_az1_cidr = "10.0.5.0/24"
 private_data_subnet_az2_cidr = "10.0.6.0/24"
 
-db_name     = "my_database"
+db_name     = "admin"
 db_password = "secure_password_123"
