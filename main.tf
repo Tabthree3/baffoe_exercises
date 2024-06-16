@@ -46,7 +46,7 @@ module "database" {
   vpc_id                       = module.vpc.vpc_id
   private_data_subnet_az1_cidr = module.vpc.private_data_subnet_az1_id
   private_data_subnet_az2_cidr = module.vpc.private_data_subnet_az2_id
-  #  db_security_group_id = module.security-groups.db_security_group_id
+  db_security_group_id = module.security-groups.db_security_group_id
   db_name     = var.db_name
   db_password = var.db_password
 
