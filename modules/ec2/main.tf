@@ -84,7 +84,8 @@ resource "aws_launch_template" "ec2module_app" {
   name_prefix            = "ec2_app"
   image_id               = data.aws_ami.linux.id
   instance_type          = "t2.micro"
-  vpc_security_group_ids = [var.appserver_security_group_id]
+  vpc_security_group_ids = [var.appserver_security_group_id] 
+  key_name               = "pemkey2"  # Hardcoded key name
   user_data              = filebase64("script_2.sh")
 
   tags = {
