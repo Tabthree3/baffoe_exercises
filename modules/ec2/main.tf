@@ -9,8 +9,6 @@ data "aws_ami" "linux" {
 
   owners = ["amazon"]
 }
-
-# Define the launch template for the bastion host
 resource "aws_launch_template" "ec2module_bastion" {
   name_prefix            = "ec2_web"
   image_id               = data.aws_ami.linux.id
@@ -19,10 +17,15 @@ resource "aws_launch_template" "ec2module_bastion" {
   key_name               = "pemkey2"  # Hardcoded key name
   user_data              = filebase64("script.sh")
 
-  tags = {
-    Name = "ec2_bastion"
+  tag_specifications {
+    resource_type = "instance"
+
+    tags = {
+      Name = "ec2_bastion"
+    }
   }
 }
+
 
 # Define the autoscaling group for the bastion host
 resource "aws_autoscaling_group" "ec2_bastion" {
@@ -88,9 +91,13 @@ resource "aws_launch_template" "ec2module_app" {
   key_name               = "pemkey2"  # Hardcoded key name
   user_data              = filebase64("script_2.sh")
 
+  tag_specifications {
+    resource_type = "instance"
+
   tags = {
     Name = "ec2_app_tier"
   }
+}
 }
 
 # Define the autoscaling group for the application tier
